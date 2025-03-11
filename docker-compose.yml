@@ -1,0 +1,48 @@
+services:
+  reverse-proxy:
+    build:
+      context: reverse-proxy
+      dockerfile: Dockerfile
+    ports:
+      - '3000:80'
+    depends_on:
+      - nestjs-app
+
+  nestjs-app:
+    build:
+      context: app-cities-backend
+      dockerfile: Dockerfile
+    ports:
+      - '3001:3001'
+    depends_on:
+      - mysql_db
+
+  mysql_db:
+    build:
+      context: mysql-db
+      dockerfile: Dockerfile
+    ports:
+      - 3307:3307
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_password_1234
+      - MYSQL_DATABASE=cities_record_db
+      - MYSQL_USER=developer
+      - MYSQL_PASSWORD=generic_password
+      - MYSQL_TCP_PORT=3307
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  react-app:
+    build:
+      context: app-cities-frontend
+      dockerfile: Dockerfile
+    ports:
+      - '5173:5173'
+    depends_on:
+      - nestjs-app
+    environment:
+      - VITE_API_URL=http://localhost:3000
+
+volumes:
+  mysql_data:
+    driver: local

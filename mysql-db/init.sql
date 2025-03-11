@@ -1,0 +1,9 @@
+CREATE DATABASE IF NOT EXISTS cities_record_db;
+
+USE cities_record_db;
+
+CREATE TABLE IF NOT EXISTS cities (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    roll INT NOT NULL
+);
