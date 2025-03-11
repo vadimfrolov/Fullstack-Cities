@@ -15,7 +15,14 @@ services:
     ports:
       - '3001:3001'
     depends_on:
-      - mysql_db
+      mysql_db:
+        condition: service_healthy
+    environment:
+      - DB_HOST=mysql_db
+      - DB_PORT=3307
+      - DB_USERNAME=developer
+      - DB_PASSWORD=generic_password
+      - DB_DATABASE=cities_record_db
 
   mysql_db:
     build:
@@ -31,6 +38,11 @@ services:
       - MYSQL_TCP_PORT=3307
     volumes:
       - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-P", "3307", "-u", "developer", "--password=generic_password"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
 
   react-app:
     build:

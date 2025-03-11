@@ -12,6 +12,16 @@ export class CityController {
         private readonly cityService: CityService,
     ) { }
 
+    @Get()
+    async getAllCities() {
+        try {
+            const res = await this.cityService.getAllCities();
+            return commonResponse(true, 'Get All Cities Successfully', res);
+        } catch (e) {
+            return commonResponse(false, 'Get All Cities Failed', e);
+        }
+    }
+
     @Post()
     async createCityRecord(@Body() payload: CreateCityRecordDto) {
         try {

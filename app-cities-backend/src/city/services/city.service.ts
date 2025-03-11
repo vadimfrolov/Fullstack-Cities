@@ -11,6 +11,14 @@ export class CityService {
         @InjectRepository(CityEntity) private readonly cityRepo: Repository<CityEntity>,
     ) { }
 
+    async getAllCities(): Promise<CityEntity[]> {
+        try {
+            return await this.cityRepo.find();
+        } catch (e) {
+            throw e;
+        }
+    }
+
     async createCityRecord(payload: CreateCityRecordDto): Promise<CityEntity> {
         try {
             const prev = await this.cityRepo.findOne({
