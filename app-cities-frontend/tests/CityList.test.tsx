@@ -1,9 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
-import { CityList } from './CityList';
-import * as cityService from '../services/cityService';
+import { CityList } from '../src/components/CityList';
+import * as cityService from '../src/services/cityService';
 
-vi.mock('../services/cityService', () => ({
+vi.mock('../src/services/cityService', () => ({
   fetchCities: vi.fn(),
 }));
 
