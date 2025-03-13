@@ -19,19 +19,25 @@ describe('CityList Component', () => {
       longitude: '74.0060',
       population: '8336817',
       founded: '1624',
-      landmarks: ['Statue of Liberty', 'Empire State Building']
+      landmarks: ['Statue of Liberty', 'Empire State Building', 'Central Park'],
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      deletedAt: null
     },
     {
       id: '2',
-      name: 'Paris',
-      name_native: 'Paris',
-      country: 'France',
-      continent: 'Europe',
-      latitude: '48.8566',
-      longitude: '2.3522',
-      population: '2161000',
-      founded: '250 BC',
-      landmarks: ['Eiffel Tower', 'Louvre Museum']
+      name: 'Tokyo',
+      name_native: '東京',
+      country: 'Japan',
+      continent: 'Asia',
+      latitude: '35.6762',
+      longitude: '139.6503',
+      population: '13929286',
+      founded: '1457',
+      landmarks: ['Tokyo Tower', 'Senso-ji', 'Meiji Shrine'],
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      deletedAt: null
     }
   ];
 
@@ -68,9 +74,9 @@ describe('CityList Component', () => {
       expect(screen.getByTestId('city-card-1')).toBeInTheDocument();
       expect(screen.getByTestId('city-card-2')).toBeInTheDocument();
       expect(screen.getByTestId('city-name-1')).toHaveTextContent('New York');
-      expect(screen.getByTestId('city-name-2')).toHaveTextContent('Paris');
+      expect(screen.getByTestId('city-name-2')).toHaveTextContent('Tokyo');
       expect(screen.getByTestId('landmark-1-0')).toHaveTextContent('Statue of Liberty');
-      expect(screen.getByTestId('landmark-2-0')).toHaveTextContent('Eiffel Tower');
+      expect(screen.getByTestId('landmark-2-0')).toHaveTextContent('Tokyo Tower');
     });
   });
 
@@ -91,7 +97,7 @@ describe('CityList Component', () => {
     
     await waitFor(() => {
       expect(screen.getByTestId('city-population-1')).toHaveTextContent('8,336,817');
-      expect(screen.getByTestId('city-population-2')).toHaveTextContent('2,161,000');
+      expect(screen.getByTestId('city-population-2')).toHaveTextContent('13,929,286');
     });
   });
 });

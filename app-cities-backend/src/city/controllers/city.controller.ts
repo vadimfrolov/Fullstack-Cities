@@ -3,7 +3,8 @@ import { CityService } from '../services/city.service';
 import { CreateCityRecordDto } from '../dtos/create-city-record.dto';
 import { UpdateCityRecordDto } from '../dtos/update-city-record.dto';
 import { ApiTags } from '@nestjs/swagger';
-import { commonResponse } from 'src/common/output-message';
+import { CommonResponse, commonResponse } from 'src/common/output-message';
+import { CityEntity } from '../entity/city.entity';
 
 @ApiTags('City Record')
 @Controller('city')
@@ -13,7 +14,7 @@ export class CityController {
     ) { }
 
     @Get()
-    async getAllCities() {
+    async getAllCities(): Promise<CommonResponse<CityEntity[] | Error>> {
         try {
             const res = await this.cityService.getAllCities();
             return commonResponse(true, 'Get All Cities Successfully', res);
