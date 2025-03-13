@@ -29,21 +29,21 @@ export function CityList() {
     return () => {};
   }, []);
 
-  if (loading) return <div className="loading">Loading cities...</div>;
-  if (error) return <div className="error">{error}</div>;
+  if (loading) return <div data-testid="loading-state" className="loading">Loading cities...</div>;
+  if (error) return <div data-testid="error-state" className="error">{error}</div>;
 
   return (
-    <div className="city-list">
-      <h2>World Cities</h2>
+    <div data-testid="city-list" className="city-list">
+      <h2 data-testid="city-list-title">World Cities</h2>
       {cities.length === 0 ? (
-        <p>No cities found</p>
+        <p data-testid="no-cities-message">No cities found</p>
       ) : (
-        <div className="city-cards">
+        <div data-testid="city-cards" className="city-cards">
           {cities.map((city) => (
-            <div key={city.id} className="city-card">
+            <div key={city.id} data-testid={`city-card-${city.id}`} className="city-card">
               <div className="city-header">
-                <h3>{city.name}</h3>
-                <h4 className="native-name">{city.name_native}</h4>
+                <h3 data-testid={`city-name-${city.id}`}>{city.name}</h3>
+                <h4 data-testid={`city-native-name-${city.id}`} className="native-name">{city.name_native}</h4>
               </div>
               <div className="city-info">
                 <p>
@@ -52,7 +52,7 @@ export function CityList() {
                 <p>
                   <strong>Continent:</strong>{city.continent}
                 </p>
-                <p>
+                <p data-testid={`city-population-${city.id}`}>
                   <strong>Population:</strong>{" "}
                   {parseInt(city.population).toLocaleString()}
                 </p>
@@ -64,9 +64,9 @@ export function CityList() {
                     <p>
                       <strong>Landmarks:</strong>
                     </p>
-                    <ul className="landmark-list">
+                    <ul data-testid={`city-landmarks-${city.id}`} className="landmark-list">
                       {city.landmarks.map((landmark, index) => (
-                        <li key={index}>{landmark}</li>
+                        <li key={index} data-testid={`landmark-${city.id}-${index}`}>{landmark}</li>
                       ))}
                     </ul>
                   </div>

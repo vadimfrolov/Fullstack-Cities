@@ -3,7 +3,6 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { CityList } from './CityList';
 import * as cityService from '../services/cityService';
 
-// Mock the cityService module
 vi.mock('../services/cityService', () => ({
   fetchCities: vi.fn(),
 }));
@@ -45,7 +44,7 @@ describe('CityList Component', () => {
     
     render(<CityList />);
     
-    expect(screen.getByText('Loading cities...')).toBeInTheDocument();
+    expect(screen.getByTestId('loading-state')).toBeInTheDocument();
   });
 
   it('should display error message when fetch fails', async () => {
@@ -54,6 +53,7 @@ describe('CityList Component', () => {
     render(<CityList />);
     
     await waitFor(() => {
+      expect(screen.getByTestId('error-state')).toBeInTheDocument();
       expect(screen.getByText('Failed to load cities')).toBeInTheDocument();
     });
   });
@@ -64,10 +64,13 @@ describe('CityList Component', () => {
     render(<CityList />);
     
     await waitFor(() => {
-      expect(screen.getByText('New York')).toBeInTheDocument();
-      expect(screen.getByText('Paris')).toBeInTheDocument();
-      expect(screen.getByText('Statue of Liberty')).toBeInTheDocument();
-      expect(screen.getByText('Eiffel Tower')).toBeInTheDocument();
+      expect(screen.getByTestId('city-list-title')).toBeInTheDocument();
+      expect(screen.getByTestId('city-card-1')).toBeInTheDocument();
+      expect(screen.getByTestId('city-card-2')).toBeInTheDocument();
+      expect(screen.getByTestId('city-name-1')).toHaveTextContent('New York');
+      expect(screen.getByTestId('city-name-2')).toHaveTextContent('Paris');
+      expect(screen.getByTestId('landmark-1-0')).toHaveTextContent('Statue of Liberty');
+      expect(screen.getByTestId('landmark-2-0')).toHaveTextContent('Eiffel Tower');
     });
   });
 
@@ -77,7 +80,7 @@ describe('CityList Component', () => {
     render(<CityList />);
     
     await waitFor(() => {
-      expect(screen.getByText('No cities found')).toBeInTheDocument();
+      expect(screen.getByTestId('no-cities-message')).toBeInTheDocument();
     });
   });
 
@@ -87,8 +90,8 @@ describe('CityList Component', () => {
     render(<CityList />);
     
     await waitFor(() => {
-      expect(screen.getByText(/8,336,817/)).toBeInTheDocument(); // New York's population
-      expect(screen.getByText(/2,161,000/)).toBeInTheDocument(); // Paris's population
+      expect(screen.getByTestId('city-population-1')).toHaveTextContent('8,336,817');
+      expect(screen.getByTestId('city-population-2')).toHaveTextContent('2,161,000');
     });
   });
 });
