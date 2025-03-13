@@ -46,6 +46,6 @@ describe('CityController (e2e)', () => {
           expect(res.body.message).toBe('Get All Cities Successfully');
           expect(res.body.data).toEqual(mockCities);
         });
-    }, 10000); // Increase timeout for the test itself
+    }, 10000);
   });
 });

@@ -17,7 +17,7 @@ import { SeedModule } from './seed/seed.module';
       entities: [CityEntity],
       autoLoadEntities: true,
       synchronize: true,
-      logging: true, // Enable SQL query logging
+      logging: true,
     }),
     CityModule,
     SeedModule,
