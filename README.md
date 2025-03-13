@@ -74,6 +74,7 @@ Run the frontend test suite with:
 
 ```
 cd app-cities-frontend
+npm i
 npm test
 ```
 
@@ -81,6 +82,7 @@ To run tests with coverage report:
 
 ```
 cd app-cities-frontend
+npm i
 npm test -- --coverage
 ```
 
