@@ -47,10 +47,10 @@ export function CityList() {
               </div>
               <div className="city-info">
                 <p>
-                  <strong>Country:</strong> {city.country}
+                  <strong>Country:</strong>{city.country}
                 </p>
                 <p>
-                  <strong>Continent:</strong> {city.continent}
+                  <strong>Continent:</strong>{city.continent}
                 </p>
                 <p>
                   <strong>Population:</strong>{" "}
