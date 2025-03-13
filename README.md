@@ -4,14 +4,14 @@ A comprehensive web application that displays information about cities around th
 
 ## Project Overview
 
-Fullstack Cities is a full-stack web application that provides detailed information about various cities including their native names, geographic coordinates, population, founding date, and notable landmarks.
+Fullstack Cities is a full-stack web application that provides detailed information about various cities.
 
 ## Project Structure
 
 - **app-cities-frontend**: React-based frontend application
 - **app-cities-backend**: Backend API service
 - **mysql-db**: Database service for storing city information
-- **reverse-proxy**: Nginx reverse proxy for routing requests between services
+- **proxy**: Nginx
 
 ## Features
 
@@ -36,7 +36,7 @@ Fullstack Cities is a full-stack web application that provides detailed informat
 
 ### Infrastructure
 - Docker
-- Nginx (reverse proxy)
+- Nginx
 
 ## Getting Started
 
@@ -105,13 +105,3 @@ npm run test:cov
 The application interacts with a cities API that provides endpoints for:
 
 - Fetching all cities
-- Searching cities by name, country, or continent
-- Viewing detailed information for a specific city
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
