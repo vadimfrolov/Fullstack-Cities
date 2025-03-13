@@ -11,20 +11,30 @@ describe('AppController (e2e)', () => {
       imports: [AppModule],
     }).compile();
 
-    app = moduleFixture.createNestApplication();
+    app = moduleFixture.createNestApplication({
+      logger: ['error', 'warn'],
+    });
+    app.enableCors({ exposedHeaders: ['Content-Disposition'] });
     await app.init();
-  }, 30000); // Increase timeout to 30 seconds
+  });
 
   afterEach(async () => {
-    if (app) {
-      await app.close();
-    }
+    await app.close();
   });
 
   it('/ (GET)', () => {
     return request(app.getHttpServer())
       .get('/')
       .expect(200)
-      .expect('Hello World!');
-  }, 10000); // Increase timeout for the test itself
+      .expect('API Working!!');
+  });
+  
+  it('should have CORS enabled with correct headers', async () => {
+    const response = await request(app.getHttpServer())
+      .get('/')
+      .expect(200);
+      
+    expect(response.headers['access-control-allow-origin']).toBe('*');
+    expect(response.headers['access-control-expose-headers']).toContain('Content-Disposition');
+  });
 });

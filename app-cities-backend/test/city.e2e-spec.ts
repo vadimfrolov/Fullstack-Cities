@@ -28,7 +28,7 @@ describe('CityController (e2e)', () => {
 
     app = moduleFixture.createNestApplication();
     await app.init();
-  }, 30000); // Increase timeout to 30 seconds
+  }, 30000);
 
   afterEach(async () => {
     if (app) {
