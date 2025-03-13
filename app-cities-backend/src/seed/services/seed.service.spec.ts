@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { Repository, DeepPartial } from 'typeorm';
+import { Repository } from 'typeorm';
 import { SeedService } from './seed.service';
 import { CityEntity } from '../../city/entity/city.entity';
 import * as fs from 'fs';
@@ -169,7 +169,7 @@ describe('SeedService', () => {
     
     expect(readFileCalls).toContain(mockProdPath);
     expect(readFileCalls).toContain(mockDevPath);
-    expect(readFileCalls.length).toBe(2);
+    expect(readFileCalls.length).toBe 2;
     expect(readFileCalls[0]).toBe(mockProdPath);
     expect(readFileCalls[1]).toBe(mockDevPath);
     
