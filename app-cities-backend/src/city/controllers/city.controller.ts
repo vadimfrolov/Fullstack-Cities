@@ -21,44 +21,4 @@ export class CityController {
             return commonResponse(false, 'Get All Cities Failed', e);
         }
     }
-
-    @Post()
-    async createCityRecord(@Body() payload: CreateCityRecordDto) {
-        try {
-            const res = await this.cityService.createCityRecord(payload);
-            return commonResponse(true, 'Create City Record Successfully', res);
-        } catch (e) {
-            return commonResponse(false, 'Create City Record Failed', e);
-        }
-    }
-
-    @Get(':roll')
-    async getCityRecordByRoll(@Param('roll') roll: number) {
-        try {
-            const res = await this.cityService.getCityByRoll(roll);
-            return commonResponse(true, 'Get City Successfully', res);
-        } catch (e) {
-            return commonResponse(false, 'Get City Failed', e);
-        }
-    }
-
-    @Patch(':roll')
-    async updateCityRecord(@Param('roll') roll: number, @Body() payload: UpdateCityRecordDto) {
-        try {
-            const res = await this.cityService.updateCity(roll, payload);
-            return commonResponse(true, 'Update City Record Successfully', res);
-        } catch (e) {
-            return commonResponse(false, 'Update City Failed', e);
-        }
-    }
-
-    @Delete(':roll')
-    async deleteCityRecord(@Param('roll') roll: number) {
-        try {
-            const res = await this.cityService.deleteRecord(roll);
-            return commonResponse(true, 'Delete City Record Successfully', res);
-        } catch (e) {
-            return commonResponse(false, 'Delete City Record Failed', e);
-        }
-    }
 }

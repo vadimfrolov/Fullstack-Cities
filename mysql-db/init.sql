@@ -8,7 +8,6 @@ DROP TABLE IF EXISTS city;
 -- Create table with the exact structure that TypeORM expects
 CREATE TABLE IF NOT EXISTS city (
     id VARCHAR(36) PRIMARY KEY,
-    roll INT NOT NULL,
     name VARCHAR(255) NOT NULL,
     name_native VARCHAR(255),
     country VARCHAR(255),

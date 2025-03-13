@@ -94,7 +94,6 @@ export class SeedService implements OnModuleInit {
             // Map JSON data to CityEntity structure with all fields
             const cityEntities = cities.map((city, index) => {
                 return this.cityRepo.create({
-                    roll: index + 1,
                     name: city.name,
                     name_native: city.name_native,
                     country: city.country,

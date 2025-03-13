@@ -1,6 +1,5 @@
 export interface City {
     id: string;
-    roll: number;
     name: string;
     name_native: string;
     country: string;

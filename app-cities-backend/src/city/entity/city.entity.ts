@@ -5,9 +5,6 @@ export class CityEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({ type: 'int' })
-    roll: number;
-
     @Column({ type: 'varchar' })
     name: string;
     

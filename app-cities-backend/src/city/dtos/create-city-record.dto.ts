@@ -6,8 +6,6 @@ export class CreateCityRecordDto {
         required: true,
         type: 'number',
     })
-    @IsNumber()
-    roll: number;
 
     @ApiProperty({
         required: true,
