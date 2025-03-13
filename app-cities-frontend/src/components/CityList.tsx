@@ -13,7 +13,6 @@ export function CityList() {
 
     const loadCities = async () => {
       try {
-        console.log("Fetching cities data...");
         requestMadeRef.current = true;
         const data = await fetchCities();
         setCities(data);

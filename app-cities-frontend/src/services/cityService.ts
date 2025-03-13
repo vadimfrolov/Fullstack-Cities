@@ -29,7 +29,7 @@ export async function fetchCities(): Promise<City[]> {
     }
 
     try {
-        console.log('Making API request for cities');
+        // console.log('Making API request for cities');
         const response = await fetch('http://localhost:3000/api/city');
         const result = await response.json() as ApiResponse<City[]>;
         
