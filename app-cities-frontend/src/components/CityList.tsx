@@ -6,50 +6,87 @@ export function CityList() {
   const [cities, setCities] = useState<City[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const requestMadeRef = useRef(false);
+  const initialLoadMadeRef = useRef(false);
+
+  const loadCities = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const data = await fetchCities();
+      setCities(data);
+      setLoading(false);
+    } catch (err) {
+      setError("Failed to load cities");
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    if (requestMadeRef.current) return;
-
-    const loadCities = async () => {
-      try {
-        requestMadeRef.current = true;
-        const data = await fetchCities();
-        setCities(data);
-        setLoading(false);
-      } catch (err) {
-        setError("Failed to load cities");
-        setLoading(false);
-      }
-    };
-
+    if (initialLoadMadeRef.current) return;
+    initialLoadMadeRef.current = true;
     loadCities();
-
     return () => {};
   }, []);
 
-  if (loading) return <div data-testid="loading-state" className="loading">Loading cities...</div>;
-  if (error) return <div data-testid="error-state" className="error">{error}</div>;
+  if (loading)
+    return (
+      <div data-testid="loading-state" className="loading">
+        Loading cities...
+      </div>
+    );
+  if (error)
+    return (
+      <div data-testid="error-state" className="error">
+        <p>{error}</p>
+        <button
+          data-testid="retry-button-error"
+          onClick={loadCities}
+          className="retry-button"
+        >
+          Retry
+        </button>
+      </div>
+    );
 
   return (
     <div data-testid="city-list" className="city-list">
       <h2 data-testid="city-list-title">World Cities</h2>
       {cities.length === 0 ? (
-        <p data-testid="no-cities-message">No cities found</p>
+        <div data-testid="no-cities-container">
+          <p data-testid="no-cities-message">No cities found</p>
+          <button
+            data-testid="retry-button-empty"
+            onClick={loadCities}
+            className="retry-button"
+          >
+            Retry
+          </button>
+        </div>
       ) : (
         <div data-testid="city-cards" className="city-cards">
           {cities.map((city) => (
-            <div key={city.id} data-testid={`city-card-${city.id}`} className="city-card">
+            <div
+              key={city.id}
+              data-testid={`city-card-${city.id}`}
+              className="city-card"
+            >
               <div className="city-header">
                 <h3 data-testid={`city-name-${city.id}`}>{city.name}</h3>
-                <h4 data-testid={`city-native-name-${city.id}`} className="native-name">{city.name_native}</h4>
+                <h4
+                  data-testid={`city-native-name-${city.id}`}
+                  className="native-name"
+                >
+                  {city.name_native}
+                </h4>
               </div>
               <div className="city-info">
                 <p>
-                  <strong>Country:</strong>{city.country}
+                  <strong>Country:</strong>
+                  {city.country}
                 </p>
                 <p>
-                  <strong>Continent:</strong>{city.continent}
+                  <strong>Continent:</strong>
+                  {city.continent}
                 </p>
                 <p data-testid={`city-population-${city.id}`}>
                   <strong>Population:</strong>{" "}
@@ -63,9 +100,17 @@ export function CityList() {
                     <p>
                       <strong>Landmarks:</strong>
                     </p>
-                    <ul data-testid={`city-landmarks-${city.id}`} className="landmark-list">
+                    <ul
+                      data-testid={`city-landmarks-${city.id}`}
+                      className="landmark-list"
+                    >
                       {city.landmarks.map((landmark, index) => (
-                        <li key={index} data-testid={`landmark-${city.id}-${index}`}>{landmark}</li>
+                        <li
+                          key={index}
+                          data-testid={`landmark-${city.id}-${index}`}
+                        >
+                          {landmark}
+                        </li>
                       ))}
                     </ul>
                   </div>

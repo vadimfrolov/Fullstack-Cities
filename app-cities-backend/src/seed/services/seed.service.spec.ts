@@ -19,12 +19,10 @@ describe('SeedService', () => {
   beforeEach(async () => {
     jest.clearAllMocks();
 
-    jest
-      .spyOn(global, 'setTimeout')
-      .mockImplementation((callback: any, _timeout?: any) => {
-        callback();
-        return { ref: () => {}, unref: () => {} } as any;
-      });
+    jest.spyOn(global, 'setTimeout').mockImplementation((callback: any) => {
+      callback();
+      return { ref: () => {}, unref: () => {} } as any;
+    });
 
     jest.spyOn(path, 'join').mockImplementation((...args) => {
       if (args[0] === process.cwd() && args[1] === 'cities.json') {
@@ -164,7 +162,7 @@ describe('SeedService', () => {
 
     const readFileCalls: string[] = [];
     (fs.readFileSync as jest.Mock).mockReset();
-    (fs.readFileSync as jest.Mock).mockImplementation((filepath, encoding) => {
+    (fs.readFileSync as jest.Mock).mockImplementation((filepath) => {
       readFileCalls.push(filepath);
 
       if (filepath === mockProdPath) {
