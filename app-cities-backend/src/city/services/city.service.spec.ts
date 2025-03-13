@@ -27,7 +27,9 @@ describe('CityService', () => {
     }).compile();
 
     service = module.get<CityService>(CityService);
-    repository = module.get<Repository<CityEntity>>(getRepositoryToken(CityEntity));
+    repository = module.get<Repository<CityEntity>>(
+      getRepositoryToken(CityEntity),
+    );
   });
 
   it('should be defined', () => {
@@ -42,7 +44,9 @@ describe('CityService', () => {
     });
 
     it('should throw an exception if repository throws', async () => {
-      jest.spyOn(repository, 'find').mockRejectedValueOnce(new Error('Database error'));
+      jest
+        .spyOn(repository, 'find')
+        .mockRejectedValueOnce(new Error('Database error'));
       await expect(service.getAllCities()).rejects.toThrow();
     });
   });

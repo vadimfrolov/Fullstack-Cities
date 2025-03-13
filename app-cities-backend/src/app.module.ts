@@ -24,4 +24,4 @@ import { SeedModule } from './seed/seed.module';
   ],
   controllers: [AppController],
 })
-export class AppModule { }
+export class AppModule {}

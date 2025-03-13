@@ -5,9 +5,9 @@ export interface CommonResponse<T> {
 }
 
 export function commonResponse<T>(
-  success: boolean, 
-  message: string, 
-  data: T
+  success: boolean,
+  message: string,
+  data: T,
 ): CommonResponse<T> {
   return {
     success,

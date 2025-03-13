@@ -28,13 +28,13 @@ describe('AppController (e2e)', () => {
       .expect(200)
       .expect('API Working!!');
   });
-  
+
   it('should have CORS enabled with correct headers', async () => {
-    const response = await request(app.getHttpServer())
-      .get('/')
-      .expect(200);
-      
+    const response = await request(app.getHttpServer()).get('/').expect(200);
+
     expect(response.headers['access-control-allow-origin']).toBe('*');
-    expect(response.headers['access-control-expose-headers']).toContain('Content-Disposition');
+    expect(response.headers['access-control-expose-headers']).toContain(
+      'Content-Disposition',
+    );
   });
 });

@@ -9,7 +9,8 @@ const mockCommonResponse = (success, message, data) => ({
 });
 
 jest.mock('src/common/output-message', () => ({
-  commonResponse: (success, message, data) => mockCommonResponse(success, message, data),
+  commonResponse: (success, message, data) =>
+    mockCommonResponse(success, message, data),
 }));
 
 describe('CityController', () => {
@@ -56,7 +57,7 @@ describe('CityController', () => {
     it('should return error response when service fails', async () => {
       const error = new Error('Service error');
       jest.spyOn(service, 'getAllCities').mockRejectedValueOnce(error);
-      
+
       const result = await controller.getAllCities();
       expect(result).toEqual({
         success: false,

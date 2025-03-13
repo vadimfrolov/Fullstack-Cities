@@ -94,7 +94,7 @@ export class SeedService implements OnModuleInit {
 
       console.log(`Preparing to seed ${cities.length} cities`);
 
-      const cityEntities = cities.map((city, index) => {
+      const cityEntities = cities.map((city) => {
         return this.cityRepo.create({
           name: city.name,
           name_native: city.name_native,
