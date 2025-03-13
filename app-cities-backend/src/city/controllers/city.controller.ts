@@ -1,7 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { CityService } from '../services/city.service';
-import { CreateCityRecordDto } from '../dtos/create-city-record.dto';
-import { UpdateCityRecordDto } from '../dtos/update-city-record.dto';
+
 import { ApiTags } from '@nestjs/swagger';
 import { CommonResponse, commonResponse } from 'src/common/output-message';
 import { CityEntity } from '../entity/city.entity';

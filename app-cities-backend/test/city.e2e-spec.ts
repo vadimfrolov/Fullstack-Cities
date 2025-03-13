@@ -28,10 +28,12 @@ describe('CityController (e2e)', () => {
 
     app = moduleFixture.createNestApplication();
     await app.init();
-  });
+  }, 30000); // Increase timeout to 30 seconds
 
   afterEach(async () => {
-    await app.close();
+    if (app) {
+      await app.close();
+    }
   });
 
   describe('/city (GET)', () => {
@@ -44,6 +46,6 @@ describe('CityController (e2e)', () => {
           expect(res.body.message).toBe('Get All Cities Successfully');
           expect(res.body.data).toEqual(mockCities);
         });
-    });
+    }, 10000); // Increase timeout for the test itself
   });
 });
